@@ -1,0 +1,8 @@
+<div *ngIf="residence">
+    <h2>{{ residence.name }}</h2>
+    <img [src]="residence.image" alt="{{ residence.name }}" width="300">
+    <p><strong>Address:</strong> {{ residence.address }}</p>
+    <p><strong>Status:</strong> {{ residence.status }}</p>
+    <a routerLink="/" class="btn btn-secondary">Back</a>
+  </div>
+  

@@ -1,0 +1,53 @@
+<div class="container">
+    <p>Update here : </p>
+    <form [formGroup]="formResidence">
+
+        <div class="form-floating mb-3">
+            <input formControlName="name" type="text" class="form-control" id="floatingInput" placeholder="name">
+            <label for="floatingInput">Name</label>
+        </div>
+        <!-- Validation Message -->
+        <div class="alert alert-danger" *ngIf="formResidence.get('name')?.invalid && formResidence.get('name')?.touched">
+            Name is required and must be at least 2 characters long.
+        </div>
+
+        <div class="form-floating">
+            <input formControlName="address" type="text" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Address</label>
+        </div>
+        <!-- Validation Message -->
+        <div class="alert alert-danger" *ngIf="formResidence.get('address')?.invalid && formResidence.get('address')?.touched">
+            Address is required and must be at most 10 characters long.
+        </div>
+
+        <br>
+
+        <!--
+        <div class="form-floating">
+            <input formControlName="image" type="text" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Image</label>
+        </div>
+        -->
+
+        <br>
+
+        <select formControlName="status" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <option value="">Select Status</option>
+            <option value="Disponible">Disponible</option>
+            <option value="En Construction">En Construction</option>
+            <option value="Vendu">Vendu</option>
+        </select>
+        
+        <!-- Validation Message -->
+        <div class="alert alert-danger" *ngIf="formResidence.get('status')?.invalid && formResidence.get('status')?.touched">
+            Status should be: disponible, en construction, or vendu.
+        </div>
+
+        <br>
+        <button type="button" class="btn btn-outline-success" (click)="update()" [disabled]="formResidence.invalid">Update</button>
+        <br>
+
+    </form>
+</div>
+
+<br>

@@ -1,0 +1,107 @@
+<!--search bar-->
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="search-container position-relative">
+                    <form class="d-flex align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="search-icon feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input class="form-control search-input ps-5" type="search"
+                               [(ngModel)]="searchTerm" (input)="filterResidences()"
+                               placeholder="Search anything..." aria-label="Search">
+                        <button class="btn btn-search ms-2" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- Add button -->
+<br>
+<button 
+  [routerLink]="['/form-residence']" 
+  type="button" 
+  class="btn btn-outline-secondary" 
+  style="padding: 10px; float: right; margin-right: 25px;">
+  <i class="bi bi-plus-circle-fill me-2"></i>
+  Add Residence
+</button>
+
+<br>
+
+<!-- Carousel for Residences -->
+<div id="carouselResidences" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div *ngFor="let residence of listResidences; let i = index" class="carousel-item" [class.active]="i === 0">
+        <div class="card mx-auto" style="width: 18rem;">
+          <img [src]="residence.image" class="card-img-top" src="..." alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{residence.name}}</h5>
+            <p class="card-text">{{residence.status}}</p>
+            <button (click)="showLocation(residence)" class="btn btn-primary">Show Location</button>
+            <button *ngIf="residence.status=='En Construction'" class="btn btn-warning">
+              <i class="bi bi-building-exclamation me-2"></i> En Construction
+            </button>
+            <button *ngIf="residence.status=='Vendu'" class="btn btn-danger">
+              <i class="bi bi-ban me-2"></i> Vendu
+            </button>
+            <button *ngIf="residence.status=='Disponible'" class="btn btn-success">
+              <i class="bi bi-check me-1"></i> Disponible
+            </button>
+            <button (click)="listFavoris(residence)" class="btn btn-success">
+              <i class="bi bi-heart-fill"></i> Like
+            </button>
+            <br><br>
+            <button [routerLink]="['/residence-details', residence.id]" class="btn btn-dark">
+                Show Details
+            </button>
+            <br><br>
+            <button [routerLink]="['/update-residence', residence.id]" class="btn btn-dark">
+                Update
+            </button>
+            <button  (click)="deleteresidence(residence.id)" class="btn btn-dark">
+              Delete
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselResidences" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselResidences" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+  
+  <!-- Carousel for Favorites -->
+  <div id="carouselFavorites" class="carousel slide mt-4" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div *ngFor="let residence of listFav; let i = index" class="carousel-item" [class.active]="i === 0">
+        <div class="card mx-auto" style="width: 18rem;">
+          <img class="card-img-top" src="..." alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{residence.name}}</h5>
+            <p class="card-text">{{residence.status}}</p>
+            <button (click)="showLocation(residence)" class="btn btn-primary">Show Location</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselFavorites" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselFavorites" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+  
